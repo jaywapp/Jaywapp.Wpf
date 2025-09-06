@@ -7,4 +7,15 @@
     <ImplicitUsings>enable</ImplicitUsings>
   </PropertyGroup>
 
+  <ItemGroup>
+    <Compile Remove="UnitTests\**" />
+    <EmbeddedResource Remove="UnitTests\**" />
+    <None Remove="UnitTests\**" />
+    <Page Remove="UnitTests\**" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Jaywapp.Infrastructure" Version="0.1.5" />
+  </ItemGroup>
+
 </Project>
