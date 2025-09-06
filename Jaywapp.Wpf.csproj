@@ -1,12 +1,31 @@
-﻿<Project Sdk="Microsoft.NET.Sdk">
+<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFramework>net6.0-windows7.0</TargetFramework>
+    <!-- Multi-target Windows TFMs for WPF consumers -->
+    <TargetFrameworks>net48;net6.0-windows7.0;net8.0-windows7.0</TargetFrameworks>
     <Nullable>enable</Nullable>
     <UseWPF>true</UseWPF>
     <ImplicitUsings>enable</ImplicitUsings>
+
+    <!-- NuGet metadata -->
+    <PackageId>Jaywapp.Wpf</PackageId>
+    <Version>0.1.0</Version>
+    <Authors>jaywapp</Authors>
+    <Company>jaywapp</Company>
+    <Description>WPF converters and helpers used across Jaywapp projects.</Description>
+    <RepositoryUrl>https://github.com/jaywapp/Jaywapp.Wpf</RepositoryUrl>
+    <RepositoryType>git</RepositoryType>
+    <PackageProjectUrl>https://github.com/jaywapp/Jaywapp.Wpf</PackageProjectUrl>
+    <PackageLicenseExpression>MIT</PackageLicenseExpression>
+    <PackageReadmeFile>README.md</PackageReadmeFile>
+    <GenerateDocumentationFile>true</GenerateDocumentationFile>
+    <PublishRepositoryUrl>true</PublishRepositoryUrl>
+    <IncludeSymbols>true</IncludeSymbols>
+    <SymbolPackageFormat>snupkg</SymbolPackageFormat>
+    <NeutralLanguage>ko</NeutralLanguage>
   </PropertyGroup>
 
+  <!-- Exclude UnitTests from packing/build -->
   <ItemGroup>
     <Compile Remove="UnitTests\**" />
     <EmbeddedResource Remove="UnitTests\**" />
@@ -18,4 +37,17 @@
     <PackageReference Include="Jaywapp.Infrastructure" Version="0.1.5" />
   </ItemGroup>
 
+  <!-- Add WPF refs for .NET Framework target -->
+  <ItemGroup Condition="'$(TargetFramework)' == 'net48'">
+    <Reference Include="PresentationCore" />
+    <Reference Include="PresentationFramework" />
+    <Reference Include="WindowsBase" />
+  </ItemGroup>
+
+  <!-- Ensure README is packed -->
+  <ItemGroup>
+    <None Include="README.md" Pack="true" PackagePath="" />
+  </ItemGroup>
+
 </Project>
+
